@@ -1,0 +1,14 @@
+﻿insert into Genres (Name) values ('Comedy');
+insert into Genres (Name) values ('Adventure');
+insert into Genres (Name) values ('Drama');
+insert into Genres (Name) values ('Romance');
+insert into Genres (Name) values ('Action');
+insert into Genres (Name) values ('Thriller');
+insert into Genres (Name) values ('Crime');
+insert into Genres (Name) values ('Children');
+insert into Genres (Name) values ('Fantasy');
+insert into Genres (Name) values ('Documentary');
+insert into Genres (Name) values ('Animation');
+insert into Genres (Name) values ('Musical');
+insert into Genres (Name) values ('Horror');
+insert into Genres (Name) values ('Sci-Fi');
