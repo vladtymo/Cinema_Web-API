@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Cinema_WebApi.Validators;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -21,6 +22,7 @@ namespace Cinema_WebApi.Data
     {
         public int Id { get; set; }
         [Required, MaxLength(200)]
+        [FirstLetter]
         public string Name { get; set; }
     }
 

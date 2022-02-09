@@ -26,7 +26,7 @@ namespace Cinema_WebApi.Controllers
             return _context.Genres.ToList();
         }
 
-        [HttpGet("{id}")] // api/genre/5
+        [HttpGet("{id:int}")] // api/genre/5
         public ActionResult<Genre> Get(int id)
         {
             var genre = _context.Genres.FirstOrDefault(g => g.Id == id);
@@ -36,22 +36,39 @@ namespace Cinema_WebApi.Controllers
             return genre;
         }
 
-        [HttpPost]
-        public ActionResult Post()
+        [HttpPost()]
+        public ActionResult Post([FromBody] Genre genre)
         {
-            return NoContent();
+            // ApiController attribute already checked the model state 
+            //if (!ModelState.IsValid)
+            //{
+            //    return BadRequest(ModelState);
+            //}
+            _context.Genres.Add(genre);
+            _context.SaveChanges();
+
+            return Ok();
         }
 
         [HttpPut]
-        public ActionResult Put()
+        public ActionResult Put([FromBody] Genre genre)
         {
-            return NoContent();
+            _context.Genres.Update(genre);
+            _context.SaveChanges();
+
+            return Ok();
         }
 
-        [HttpDelete]
-        public ActionResult Delete()
+        [HttpDelete("{id:int}")]
+        public ActionResult Delete(int id)
         {
-            return NoContent();
+            var genre = _context.Genres.FirstOrDefault(g => g.Id == id);
+
+            if (genre == null) return NotFound();
+            _context.Genres.Remove(genre);
+            _context.SaveChanges();
+
+            return Ok();
         }
     }
 }

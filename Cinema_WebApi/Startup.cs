@@ -32,6 +32,10 @@ namespace Cinema_WebApi
                 options.UseSqlServer(
                 Configuration.GetConnectionString("LocalCinemaDbConnection")));
 
+            //services.AddSingleton<IRepository, Repository>();
+            //services.AddScoped();
+            //services.AddTransient();
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
