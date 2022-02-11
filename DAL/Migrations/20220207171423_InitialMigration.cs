@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Cinema_WebApi.Migrations
+namespace DAL.Migrations
 {
     public partial class InitialMigration : Migration
     {

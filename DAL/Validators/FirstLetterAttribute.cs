@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Cinema_WebApi.Validators
+namespace DAL.Validators
 {
     public class FirstLetterAttribute : ValidationAttribute
     {

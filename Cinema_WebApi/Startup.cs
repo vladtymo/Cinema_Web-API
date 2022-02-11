@@ -1,4 +1,5 @@
-using Cinema_WebApi.Data;
+using BLL;
+using DAL.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -36,6 +37,9 @@ namespace Cinema_WebApi
             //services.AddScoped();
             //services.AddTransient();
 
+            services.AddScoped<IGenreService, GenreService>();
+
+            services.AddResponseCaching();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -56,6 +60,8 @@ namespace Cinema_WebApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseResponseCaching();
 
             app.UseAuthorization();
 

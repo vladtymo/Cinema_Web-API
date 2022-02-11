@@ -1,6 +1,8 @@
-﻿using Cinema_WebApi.Data;
+﻿using BLL;
+using DAL.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,30 +10,50 @@ using System.Threading.Tasks;
 
 namespace Cinema_WebApi.Controllers
 {
+    /* Log Levels
+     * Trace	    0	LogTrace()	        Logs messages only for tracing purposes for the developers.
+     * Debug	    1	LogDebug()	        Logs messages for short-term debugging purposes.
+     * Information	2	LogInformation()	Logs messages for the flow of the application.
+     * Warning	    3	LogWarning()	    Logs messages for abnormal or unexpected events in the application flow.
+     * Error	    4	LogError()	        Logs error messages.
+     * Critical	    5	LogCritical()	    Logs failures messages that require immediate attention.
+     */
     [Route("api/[controller]")]
     [ApiController]
     public class GenreController : ControllerBase
     {
-        public readonly CinemaDbContext _context;
-        public GenreController(CinemaDbContext context)
+        public readonly IGenreService _genreService;
+        public readonly ILogger<GenreController> _logger;
+
+        public GenreController(ILogger<GenreController> logger, IGenreService genreService)
         {
-            _context = context;
+            _genreService = genreService;
+            _logger = logger;
         }
 
         //[HttpGet("list")] // api/genre/list
         //[HttpGet("/allgenres")] // allgenres
         [HttpGet]
+        [ResponseCache(Duration = 60)]
         public ActionResult<IEnumerable<Genre>> Get()
         {
-            return _context.Genres.ToList();
+            return Ok(_genreService.GetAllGenres());
         }
 
         [HttpGet("{id:int}")] // api/genre/5
         public ActionResult<Genre> Get(int id)
         {
-            var genre = _context.Genres.FirstOrDefault(g => g.Id == id);
+            _logger.LogDebug($"Getting a genre with id {id}");
 
-            if (genre == null) return NotFound();
+            var genre = _genreService.GetGenreById(id);
+
+            if (genre == null)
+            {
+                _logger.LogError($"Not found a genre with id {id}");
+                return NotFound();
+            }
+
+            _logger.LogInformation($"Got a genre with id {id}");
 
             return genre;
         }
@@ -44,8 +66,9 @@ namespace Cinema_WebApi.Controllers
             //{
             //    return BadRequest(ModelState);
             //}
-            _context.Genres.Add(genre);
-            _context.SaveChanges();
+            _genreService.AddGenre(genre);
+
+            _logger.LogInformation($"Genre was succesfully added!");
 
             return Ok();
         }
@@ -53,8 +76,7 @@ namespace Cinema_WebApi.Controllers
         [HttpPut]
         public ActionResult Put([FromBody] Genre genre)
         {
-            _context.Genres.Update(genre);
-            _context.SaveChanges();
+            _genreService.EditGenre(genre);
 
             return Ok();
         }
@@ -62,11 +84,7 @@ namespace Cinema_WebApi.Controllers
         [HttpDelete("{id:int}")]
         public ActionResult Delete(int id)
         {
-            var genre = _context.Genres.FirstOrDefault(g => g.Id == id);
-
-            if (genre == null) return NotFound();
-            _context.Genres.Remove(genre);
-            _context.SaveChanges();
+            _genreService.DeleteGenreById(id);
 
             return Ok();
         }
