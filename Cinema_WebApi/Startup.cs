@@ -1,4 +1,5 @@
 using BLL;
+using Cinema_WebApi.Helpers;
 using DAL.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -13,6 +14,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Cinema_WebApi
@@ -50,6 +52,17 @@ namespace Cinema_WebApi
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            //app.Run(async (context) =>
+            //{
+            //    await context.Response.Body.WriteAsync(Encoding.UTF8.GetBytes("Hello from the first middleware!"));
+            //});
+            //app.Use(async (context, next) =>
+            //{
+            //    // doing something
+            //    await next.Invoke();
+            //});
+
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -58,6 +71,8 @@ namespace Cinema_WebApi
             }
 
             app.UseHttpsRedirection();
+
+            app.UseMiddleware<ErrorHandlerMiddleware>();
 
             app.UseRouting();
 

@@ -1,8 +1,10 @@
-﻿using DAL.Data;
+﻿using BLL.Exceptions;
+using DAL.Data;
 using DAL.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 
 namespace BLL
 {
@@ -43,12 +45,13 @@ namespace BLL
 
         public Genre GetGenreById(int id)
         {
-            var genre = _context.Genres.FirstOrDefault(g => g.Id == id);
+            if (id < 0) 
+                throw new HttpException($"Invalid id!", HttpStatusCode.BadRequest);
+
+            var genre = _context.Genres.Find(id);
 
             if (genre == null)
-            {
-                return null;// NotFound();
-            }
+                throw new HttpException($"The Genre with id {id} does not exist!", HttpStatusCode.NotFound);
 
             return genre;
         }
