@@ -24,30 +24,28 @@ namespace Cinema_WebApi.Helpers
             {
                 await _next(context);
             }
+            catch (HttpException httpError)
+            {
+                await CreateResponse(context, httpError.StatusCode, httpError.Message);
+            }
+            catch (KeyNotFoundException error)
+            {
+                await CreateResponse(context, HttpStatusCode.NotFound, error.Message);
+            }
             catch (Exception error)
             {
-                var response = context.Response;
-                response.ContentType = "application/json";
-
-                switch (error)
-                {
-                    case HttpException e:
-                        // custom application error
-                        response.StatusCode = (int)e.StatusCode;
-                        break;
-                    case KeyNotFoundException:
-                        // not found error
-                        response.StatusCode = (int)HttpStatusCode.NotFound;
-                        break;
-                    default:
-                        // unhandled error
-                        response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                        break;
-                }
-
-                var result = JsonSerializer.Serialize(new { message = error?.Message });
-                await response.WriteAsync(result);
+                await CreateResponse(context, HttpStatusCode.InternalServerError, error?.Message);
             }
+        }
+
+        private async Task CreateResponse(HttpContext context,
+                                    HttpStatusCode statusCode = HttpStatusCode.InternalServerError, 
+                                    string message = "Unknown error type!")
+        {
+            context.Response.ContentType = "application/json";
+            context.Response.StatusCode = (int)statusCode;
+            var result = JsonSerializer.Serialize(new { message });
+            await context.Response.WriteAsync(result);
         }
     }
 }

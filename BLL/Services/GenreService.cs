@@ -1,4 +1,5 @@
 ﻿using BLL.Exceptions;
+using BLL.Resources;
 using DAL.Data;
 using DAL.Entities;
 using System;
@@ -46,12 +47,12 @@ namespace BLL
         public Genre GetGenreById(int id)
         {
             if (id < 0) 
-                throw new HttpException($"Invalid id!", HttpStatusCode.BadRequest);
+                throw new HttpException(ErrorMessages.InvalidId, HttpStatusCode.BadRequest);
 
             var genre = _context.Genres.Find(id);
 
             if (genre == null)
-                throw new HttpException($"The Genre with id {id} does not exist!", HttpStatusCode.NotFound);
+                throw new HttpException(ErrorMessages.ObjectNotExists, HttpStatusCode.NotFound);
 
             return genre;
         }
