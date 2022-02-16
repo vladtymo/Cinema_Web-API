@@ -31,6 +31,8 @@ namespace Cinema_WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllers();
+
             services.AddDbContext<CinemaDbContext>(options =>
                 options.UseSqlServer(
                 Configuration.GetConnectionString("LocalCinemaDbConnection")));
@@ -39,10 +41,10 @@ namespace Cinema_WebApi
             //services.AddScoped();
             //services.AddTransient();
 
-            services.AddScoped<IGenreService, GenreService>();
+            services.AddCustomServices();
+            services.AddAutoMapper();
 
             services.AddResponseCaching();
-            services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Cinema_WebApi", Version = "v1" });

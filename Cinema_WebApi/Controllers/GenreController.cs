@@ -1,4 +1,5 @@
 ﻿using BLL;
+using BLL.DTO;
 using DAL.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -35,23 +36,23 @@ namespace Cinema_WebApi.Controllers
         //[HttpGet("/allgenres")] // allgenres
         [HttpGet]
         [ResponseCache(Duration = 60)]
-        public ActionResult<IEnumerable<Genre>> Get()
+        public ActionResult<IEnumerable<GenreDTO>> Get()
         {
             return Ok(_genreService.GetAllGenres());
         }
 
         [HttpGet("{id:int}")] // api/genre/5
-        public ActionResult<Genre> Get(int id)
+        public ActionResult<GenreDTO> Get(int id)
         {
             _logger.LogDebug($"Getting a genre with id {id}");
 
             var genre = _genreService.GetGenreById(id);
 
-            if (genre == null)
-            {
-                _logger.LogError($"Not found a genre with id {id}");
-                return NotFound();
-            }
+            //if (genre == null)
+            //{
+            //    _logger.LogError($"Not found a genre with id {id}");
+            //    return NotFound();
+            //}
 
             _logger.LogInformation($"Got a genre with id {id}");
 
@@ -59,7 +60,7 @@ namespace Cinema_WebApi.Controllers
         }
 
         [HttpPost()]
-        public ActionResult Post([FromBody] Genre genre)
+        public ActionResult Post([FromBody] GenreDTO genre)
         {
             // ApiController attribute already checked the model state 
             //if (!ModelState.IsValid)
@@ -74,7 +75,7 @@ namespace Cinema_WebApi.Controllers
         }
 
         [HttpPut]
-        public ActionResult Put([FromBody] Genre genre)
+        public ActionResult Put([FromBody] GenreDTO genre)
         {
             _genreService.EditGenre(genre);
 
