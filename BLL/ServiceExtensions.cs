@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 using AutoMapper;
 using BLL.DTO;
 using DAL.Entities;
+using FluentValidation.AspNetCore;
+using FluentValidation;
+using BLL.Validations;
+using BLL.Helpers;
 
 namespace BLL
 {
@@ -23,12 +27,19 @@ namespace BLL
         {
             var configures = new MapperConfiguration(mc =>
             {
-                mc.CreateMap<Genre, GenreDTO>().ReverseMap();
+                mc.AddProfile<MapperProfile>();
+                //mc.CreateMap<Genre, GenreDTO>().ReverseMap();
                 //...
             });
 
             IMapper mapper = configures.CreateMapper();
             services.AddSingleton(mapper);
+        }
+
+        public static void AddFluentValidation(this IServiceCollection services)
+        {
+            services.AddFluentValidation(c => c.RegisterValidatorsFromAssemblyContaining<GenreValidator>());
+            //services.AddTransient<IValidator<GenreDTO>, GenreValidator>();
         }
     }
 }

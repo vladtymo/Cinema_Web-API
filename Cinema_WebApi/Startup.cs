@@ -41,6 +41,7 @@ namespace Cinema_WebApi
             //services.AddScoped();
             //services.AddTransient();
 
+            services.AddFluentValidation();
             services.AddCustomServices();
             services.AddAutoMapper();
 
