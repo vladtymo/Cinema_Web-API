@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using DAL.Interfaces;
+using System.ComponentModel.DataAnnotations;
 
 namespace DAL.Entities
 {
-    public class Movie
+    public class Movie : EntityBase
     {
         public int Id { get; set; }
         [Required, MaxLength(350)]

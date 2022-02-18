@@ -1,3 +1,4 @@
+using DAL;
 using BLL;
 using Cinema_WebApi.Helpers;
 using DAL.Data;
@@ -16,6 +17,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DAL.Interfaces;
 
 namespace Cinema_WebApi
 {
@@ -33,9 +35,11 @@ namespace Cinema_WebApi
         {
             services.AddControllers();
 
-            services.AddDbContext<CinemaDbContext>(options =>
-                options.UseSqlServer(
-                Configuration.GetConnectionString("LocalCinemaDbConnection")));
+            services.AddDbContext<CinemaDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("LocalCinemaDbConnection")));
+            //services.AddDbContext(Configuration.GetConnectionString("LocalCinemaDbConnection"));
+
+            services.AddScoped<IRepository<EntityBase>, BaseRepository<EntityBase>>();
+            //services.AddRepository();
 
             //services.AddSingleton<IRepository, Repository>();
             //services.AddScoped();

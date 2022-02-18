@@ -1,16 +1,17 @@
 ﻿using BLL.DTO;
 using DAL.Entities;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BLL
 {
     public interface IGenreService
     {
-        void AddGenre(GenreDTO genre);
-        IEnumerable<GenreDTO> GetAllGenres();
-        GenreDTO GetGenreById(int id);
-        void EditGenre(GenreDTO genre);
-        void DeleteGenreById(int id);
+        Task AddGenre(GenreDTO genre);
+        Task<IEnumerable<GenreDTO>> GetAllGenres();
+        Task<GenreDTO> GetGenreById(int id);
+        Task EditGenre(GenreDTO genre);
+        Task DeleteGenreById(int id);
     }
 
 }

@@ -36,17 +36,17 @@ namespace Cinema_WebApi.Controllers
         //[HttpGet("/allgenres")] // allgenres
         [HttpGet]
         [ResponseCache(Duration = 60)]
-        public ActionResult<IEnumerable<GenreDTO>> Get()
+        public async Task<ActionResult<IEnumerable<GenreDTO>>> Get()
         {
-            return Ok(_genreService.GetAllGenres());
+            return Ok(await _genreService.GetAllGenres());
         }
 
         [HttpGet("{id:int}")] // api/genre/5
-        public ActionResult<GenreDTO> Get(int id)
+        public async Task<ActionResult<GenreDTO>> Get(int id)
         {
             _logger.LogDebug($"Getting a genre with id {id}");
 
-            var genre = _genreService.GetGenreById(id);
+            var genre = await _genreService.GetGenreById(id);
 
             //if (genre == null)
             //{
@@ -60,14 +60,14 @@ namespace Cinema_WebApi.Controllers
         }
 
         [HttpPost()]
-        public ActionResult Post([FromBody] GenreDTO genre)
+        public async Task<ActionResult> Post([FromBody] GenreDTO genre)
         {
             // ApiController attribute already checked the model state 
             //if (!ModelState.IsValid)
             //{
             //    return BadRequest(ModelState);
             //}
-            _genreService.AddGenre(genre);
+            await _genreService.AddGenre(genre);
 
             _logger.LogInformation($"Genre was succesfully added!");
 
@@ -75,17 +75,17 @@ namespace Cinema_WebApi.Controllers
         }
 
         [HttpPut]
-        public ActionResult Put([FromBody] GenreDTO genre)
+        public async Task<ActionResult> Put([FromBody] GenreDTO genre)
         {
-            _genreService.EditGenre(genre);
+            await _genreService.EditGenre(genre);
 
             return Ok();
         }
 
         [HttpDelete("{id:int}")]
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            _genreService.DeleteGenreById(id);
+            await _genreService.DeleteGenreById(id);
 
             return Ok();
         }

@@ -4,61 +4,64 @@ using BLL.Exceptions;
 using BLL.Resources;
 using DAL.Data;
 using DAL.Entities;
+using DAL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace BLL
 {
     public class GenreService : IGenreService
     {
-        private readonly CinemaDbContext _context;
+        //private readonly CinemaDbContext _context;
+        private readonly IRepository<Genre> genreRepository;
         private readonly IMapper _mapper;
 
-        public GenreService(CinemaDbContext context, IMapper mapper)
+        public GenreService(IRepository<Genre> genreRepository, IMapper mapper)
         {
-            _context = context;
+            this.genreRepository = genreRepository;
             _mapper = mapper;
         }
 
-        public void AddGenre(GenreDTO genre)
+        public async Task AddGenre(GenreDTO genre)
         {
-            _context.Genres.Add(_mapper.Map<Genre>(genre));
-            _context.SaveChanges();
+            await genreRepository.InsertAsync(_mapper.Map<Genre>(genre));
+            await genreRepository.SaveChangesAsync();
         }
 
-        public void DeleteGenreById(int id)
+        public async Task DeleteGenreById(int id)
         {
             if (id < 0)
                 throw new HttpException(ErrorMessages.InvalidId, HttpStatusCode.BadRequest);
 
-            var genre = _context.Genres.FirstOrDefault(g => g.Id == id);
+            var genre = await genreRepository.GetByIdAsync(id);
 
             if (genre == null) 
                 throw new HttpException(ErrorMessages.ObjectNotExists, HttpStatusCode.NotFound);
 
-            _context.Genres.Remove(genre);
-            _context.SaveChanges();
+            await genreRepository.DeleteAsync(genre);
+            await genreRepository.SaveChangesAsync();
         }
 
-        public void EditGenre(GenreDTO genre)
+        public async Task EditGenre(GenreDTO genre)
         {
-            _context.Genres.Update(_mapper.Map<Genre>(genre));
-            _context.SaveChanges();
+            await genreRepository.UpdateAsync(_mapper.Map<Genre>(genre));
+            await genreRepository.SaveChangesAsync();
         }
 
-        public IEnumerable<GenreDTO> GetAllGenres()
+        public async Task<IEnumerable<GenreDTO>> GetAllGenres()
         {
-            return _mapper.Map<IEnumerable<GenreDTO>>(_context.Genres.ToList()); 
+            return _mapper.Map<IEnumerable<GenreDTO>>(await genreRepository.GetAsync()); 
         }
 
-        public GenreDTO GetGenreById(int id)
+        public async Task<GenreDTO> GetGenreById(int id)
         {
             if (id < 0) 
                 throw new HttpException(ErrorMessages.InvalidId, HttpStatusCode.BadRequest);
 
-            var genre = _context.Genres.Find(id);
+            var genre = await genreRepository.GetByIdAsync(id);
 
             if (genre == null)
                 throw new HttpException(ErrorMessages.ObjectNotExists, HttpStatusCode.NotFound);
