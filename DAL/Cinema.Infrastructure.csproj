@@ -12,4 +12,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BLL\Cinema.Core.csproj" />
+  </ItemGroup>
+
 </Project>

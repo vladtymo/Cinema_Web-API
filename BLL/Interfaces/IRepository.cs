@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace DAL.Interfaces
 {
-    public interface IBaseEntity { }
     public interface IRepository<TEntity> where TEntity : class, IBaseEntity
     {
         Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> filter = null,

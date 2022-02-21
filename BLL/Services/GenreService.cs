@@ -2,7 +2,6 @@
 using BLL.DTO;
 using BLL.Exceptions;
 using BLL.Resources;
-using DAL.Data;
 using DAL.Entities;
 using DAL.Interfaces;
 using System;

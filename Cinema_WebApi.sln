@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31605.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cinema_WebApi", "Cinema_WebApi\Cinema_WebApi.csproj", "{4C0957DB-2F9E-4798-9FC3-491AF2F11E99}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cinema.WebApi", "Cinema_WebApi\Cinema.WebApi.csproj", "{4C0957DB-2F9E-4798-9FC3-491AF2F11E99}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{F9EF30CE-38DE-4B23-9D7F-0FD495E7D968}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cinema.Infrastructure", "DAL\Cinema.Infrastructure.csproj", "{F9EF30CE-38DE-4B23-9D7F-0FD495E7D968}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{84F4D694-CE8A-4A8E-AC0F-7D227CF18654}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cinema.Core", "BLL\Cinema.Core.csproj", "{84F4D694-CE8A-4A8E-AC0F-7D227CF18654}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
