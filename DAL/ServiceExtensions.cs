@@ -19,6 +19,7 @@ namespace DAL
 
         public static void AddRepository(this IServiceCollection services)
         {
+            //services.AddScoped<IRepository, BaseRepository>();
             services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
         }
     }
