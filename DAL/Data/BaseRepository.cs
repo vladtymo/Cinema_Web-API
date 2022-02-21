@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Data
 {
-    public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : EntityBase 
+    public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : class, IBaseEntity 
     {
         internal CinemaDbContext context;
         internal DbSet<TEntity> dbSet;
@@ -113,7 +113,6 @@ namespace DAL.Data
             });
         }
 
-        public async Task SaveChangesAsync() => await context.SaveChangesAsync();
-        public void SaveChanges() => context.SaveChanges();
+        public async Task<int> SaveChangesAsync() => await context.SaveChangesAsync();
     }
 }

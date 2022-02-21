@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace DAL.Interfaces
 {
-    public abstract class EntityBase { }
-    public interface IRepository<TEntity> where TEntity : EntityBase
+    public interface IBaseEntity { }
+    public interface IRepository<TEntity> where TEntity : IBaseEntity
     {
         Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> filter = null,
                     Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
@@ -19,8 +19,7 @@ namespace DAL.Interfaces
         Task DeleteAsync<TKey>(TKey id);
         Task DeleteAsync(TEntity entityToDelete);
         Task UpdateAsync(TEntity entityToUpdate);
-        void SaveChanges();
-        Task SaveChangesAsync();
+        Task<int> SaveChangesAsync();
 
         // --------- TODO ---------
         // AddRange

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DAL.Entities
 {
-    public class Movie : EntityBase
+    public class Movie : IBaseEntity
     {
         public int Id { get; set; }
         [Required, MaxLength(350)]

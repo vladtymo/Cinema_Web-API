@@ -35,18 +35,16 @@ namespace Cinema_WebApi
         {
             services.AddControllers();
 
-            services.AddDbContext<CinemaDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("LocalCinemaDbConnection")));
-            //services.AddDbContext(Configuration.GetConnectionString("LocalCinemaDbConnection"));
+            //services.AddDbContext<CinemaDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("LocalCinemaDbConnection")));
+            services.AddDbContext(Configuration.GetConnectionString("LocalCinemaDbConnection"));
 
-            services.AddScoped<IRepository<EntityBase>, BaseRepository<EntityBase>>();
-            //services.AddRepository();
-
+            services.AddRepository();
             //services.AddSingleton<IRepository, Repository>();
             //services.AddScoped();
             //services.AddTransient();
 
-            services.AddFluentValidation();
             services.AddCustomServices();
+            services.AddFluentValidation();
             services.AddAutoMapper();
 
             services.AddResponseCaching();

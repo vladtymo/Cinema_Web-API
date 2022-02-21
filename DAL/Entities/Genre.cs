@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DAL.Entities
 {
-    public class Genre : EntityBase
+    public class Genre : IBaseEntity
     {
         public int Id { get; set; }
         [Required, MaxLength(200)]
