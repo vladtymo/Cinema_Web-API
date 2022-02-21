@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Data
 {
-    public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : class, IBaseEntity 
+    internal class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : class, IBaseEntity 
     {
         internal CinemaDbContext context;
         internal DbSet<TEntity> dbSet;

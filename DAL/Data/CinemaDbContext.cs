@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DAL.Data
 {
-    public class CinemaDbContext : DbContext
+    internal class CinemaDbContext : DbContext
     {
         public CinemaDbContext(DbContextOptions options) : base(options)
         {
