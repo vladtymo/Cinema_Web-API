@@ -9,6 +9,15 @@ namespace DAL.Data
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            // Seed data
+            modelBuilder.SeedGenres();
+            //...
+        }
+
         public virtual DbSet<Movie> Movies { get; set; }
         public virtual DbSet<Genre> Genres { get; set; }
     }
