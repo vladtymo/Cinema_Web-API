@@ -1,4 +1,5 @@
 ﻿using Core.Entities;
+using DAL.Configurations;
 using Microsoft.EntityFrameworkCore;
 
 namespace DAL.Data
@@ -12,6 +13,10 @@ namespace DAL.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            // Fluent API configurations
+            modelBuilder.ApplyConfiguration(new MovieConfigurations());
+            //...
 
             // Seed data
             modelBuilder.SeedGenres();

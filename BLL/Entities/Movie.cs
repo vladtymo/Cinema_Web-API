@@ -6,11 +6,11 @@ namespace Core.Entities
     public class Movie : IBaseEntity
     {
         public int Id { get; set; }
-        [Required, MaxLength(350)]
         public string Title { get; set; }
         public int Year { get; set; }
         public int Rating { get; set; }
-        [Required]
+        
+        public int GenreId { get; set; }
         public Genre Genre { get; set; }
     }
 }

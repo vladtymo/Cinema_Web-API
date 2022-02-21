@@ -1,5 +1,6 @@
 ﻿using DAL.Interfaces;
 using DAL.Validators;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Core.Entities
@@ -10,5 +11,7 @@ namespace Core.Entities
         [Required, MaxLength(200)]
         [FirstLetter]
         public string Name { get; set; }
+
+        public ICollection<Movie> Movies { get; set; }
     }
 }
