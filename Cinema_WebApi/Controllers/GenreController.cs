@@ -1,12 +1,8 @@
-﻿using BLL;
-using BLL.DTO;
-using DAL.Entities;
-using Microsoft.AspNetCore.Http;
+﻿using Core;
+using Core.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Cinema_WebApi.Controllers

@@ -1,18 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using AutoMapper;
-using BLL.DTO;
-using DAL.Entities;
 using FluentValidation.AspNetCore;
-using FluentValidation;
-using BLL.Validations;
-using BLL.Helpers;
+using Core.Validations;
+using Core.Helpers;
 
-namespace BLL
+namespace Core
 {
     public static class ServiceExtensions
     {

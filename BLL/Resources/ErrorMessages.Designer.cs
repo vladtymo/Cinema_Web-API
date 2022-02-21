@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BLL.Resources {
+namespace Core.Resources {
     using System;
     
     

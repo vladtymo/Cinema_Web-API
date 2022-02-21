@@ -1,13 +1,8 @@
 ﻿using AutoMapper;
-using BLL.DTO;
-using DAL.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Core.DTO;
+using Core.Entities;
 
-namespace BLL.Helpers
+namespace Core.Helpers
 {
     public class MapperProfile : Profile
     {

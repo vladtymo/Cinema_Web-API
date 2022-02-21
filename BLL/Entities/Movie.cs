@@ -1,7 +1,7 @@
 ﻿using DAL.Interfaces;
 using System.ComponentModel.DataAnnotations;
 
-namespace DAL.Entities
+namespace Core.Entities
 {
     public class Movie : IBaseEntity
     {

@@ -1,9 +1,8 @@
-﻿using BLL.DTO;
-using DAL.Entities;
+﻿using Core.DTO;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace BLL
+namespace Core
 {
     public interface IGenreService
     {

@@ -2,7 +2,7 @@
 using DAL.Validators;
 using System.ComponentModel.DataAnnotations;
 
-namespace DAL.Entities
+namespace Core.Entities
 {
     public class Genre : IBaseEntity
     {

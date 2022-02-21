@@ -1,16 +1,14 @@
 ﻿using AutoMapper;
-using BLL.DTO;
-using BLL.Exceptions;
-using BLL.Resources;
-using DAL.Entities;
+using Core.DTO;
+using Core.Exceptions;
+using Core.Resources;
+using Core.Entities;
 using DAL.Interfaces;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace BLL
+namespace Core
 {
     public class GenreService : IGenreService
     {
