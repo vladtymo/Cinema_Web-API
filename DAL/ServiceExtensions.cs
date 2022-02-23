@@ -1,5 +1,5 @@
 ﻿using DAL.Data;
-using DAL.Interfaces;
+using Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 

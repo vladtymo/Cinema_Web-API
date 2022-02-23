@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace DAL.Validators
+namespace Core.Validators
 {
     public class FirstLetterAttribute : ValidationAttribute
     {

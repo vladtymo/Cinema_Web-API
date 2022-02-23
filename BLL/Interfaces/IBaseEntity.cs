@@ -1,4 +1,4 @@
-﻿namespace DAL.Interfaces
+﻿namespace Core.Interfaces
 {
     public interface IBaseEntity { }
 }

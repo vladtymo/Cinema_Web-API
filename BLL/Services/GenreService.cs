@@ -3,7 +3,7 @@ using Core.DTO;
 using Core.Exceptions;
 using Core.Resources;
 using Core.Entities;
-using DAL.Interfaces;
+using Core.Interfaces;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;

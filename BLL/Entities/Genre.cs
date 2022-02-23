@@ -1,5 +1,5 @@
-﻿using DAL.Interfaces;
-using DAL.Validators;
+﻿using Core.Interfaces;
+using Core.Validators;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
