@@ -10,8 +10,8 @@ namespace DAL.Data
 {
     internal class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : class, IBaseEntity 
     {
-        internal CinemaDbContext context;
-        internal DbSet<TEntity> dbSet;
+        private CinemaDbContext context;
+        private DbSet<TEntity> dbSet;
 
         public BaseRepository(CinemaDbContext context)
         {
@@ -84,6 +84,6 @@ namespace DAL.Data
             });
         }
 
-        public async Task<int> SaveChangesAsync() => await context.SaveChangesAsync();
+        //public async Task<int> SaveChangesAsync() => await context.SaveChangesAsync();
     }
 }

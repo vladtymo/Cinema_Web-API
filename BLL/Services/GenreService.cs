@@ -13,19 +13,21 @@ namespace Core
     public class GenreService : IGenreService
     {
         //private readonly CinemaDbContext _context;
-        private readonly IRepository<Genre> genreRepository;
+        //private readonly IRepository<Genre> genreRepository;
+        private readonly IUnitOfWork unitOfWork;
+
         private readonly IMapper _mapper;
 
-        public GenreService(IRepository<Genre> genreRepository, IMapper mapper)
+        public GenreService(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            this.genreRepository = genreRepository;
+            this.unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
         public async Task AddGenre(GenreDTO genre)
         {
-            await genreRepository.InsertAsync(_mapper.Map<Genre>(genre));
-            await genreRepository.SaveChangesAsync();
+            await unitOfWork.GenreRepository.InsertAsync(_mapper.Map<Genre>(genre));
+            await unitOfWork.SaveChangesAsync();
         }
 
         public async Task DeleteGenreById(int id)
@@ -33,24 +35,24 @@ namespace Core
             if (id < 0)
                 throw new HttpException(ErrorMessages.InvalidId, HttpStatusCode.BadRequest);
 
-            var genre = await genreRepository.GetByIdAsync(id);
+            var genre = await unitOfWork.GenreRepository.GetByIdAsync(id);
 
             if (genre == null) 
                 throw new HttpException(ErrorMessages.ObjectNotExists, HttpStatusCode.NotFound);
 
-            await genreRepository.DeleteAsync(genre);
-            await genreRepository.SaveChangesAsync();
+            await unitOfWork.GenreRepository.DeleteAsync(genre);
+            await unitOfWork.SaveChangesAsync();
         }
 
         public async Task EditGenre(GenreDTO genre)
         {
-            await genreRepository.UpdateAsync(_mapper.Map<Genre>(genre));
-            await genreRepository.SaveChangesAsync();
+            await unitOfWork.GenreRepository.UpdateAsync(_mapper.Map<Genre>(genre));
+            await unitOfWork.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<GenreDTO>> GetAllGenres()
         {
-            return _mapper.Map<IEnumerable<GenreDTO>>(await genreRepository.GetAsync()); 
+            return _mapper.Map<IEnumerable<GenreDTO>>(await unitOfWork.GenreRepository.GetAsync()); 
         }
 
         public async Task<GenreDTO> GetGenreById(int id)
@@ -58,7 +60,7 @@ namespace Core
             if (id < 0) 
                 throw new HttpException(ErrorMessages.InvalidId, HttpStatusCode.BadRequest);
 
-            var genre = await genreRepository.GetByIdAsync(id);
+            var genre = await unitOfWork.GenreRepository.GetByIdAsync(id);
 
             if (genre == null)
                 throw new HttpException(ErrorMessages.ObjectNotExists, HttpStatusCode.NotFound);

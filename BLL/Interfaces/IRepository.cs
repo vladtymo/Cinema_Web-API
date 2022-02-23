@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -17,11 +18,18 @@ namespace Core.Interfaces
         Task DeleteAsync<TKey>(TKey id);
         Task DeleteAsync(TEntity entityToDelete);
         Task UpdateAsync(TEntity entityToUpdate);
-        Task<int> SaveChangesAsync();
+        //Task<int> SaveChangesAsync();
 
         // --------- TODO ---------
         // AddRange
         // DeleteRange
         // GetAll
+    }
+
+    public interface IUnitOfWork
+    {
+        IRepository<Genre> GenreRepository { get; }
+        IRepository<Movie> MovieRepository { get; }
+        Task<int> SaveChangesAsync();
     }
 }

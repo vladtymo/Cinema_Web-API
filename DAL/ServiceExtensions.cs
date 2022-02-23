@@ -2,6 +2,7 @@
 using Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Cinema.Infrastructure.Data;
 
 namespace DAL
 {
@@ -12,10 +13,15 @@ namespace DAL
             services.AddDbContext<CinemaDbContext>(options => options.UseSqlServer(connectionString));
         }
 
-        public static void AddRepository(this IServiceCollection services)
+        //public static void AddRepository(this IServiceCollection services)
+        //{
+        //    //services.AddScoped<IRepository, BaseRepository>();
+        //    services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
+        //}
+
+        public static void AddUnitOfWork(this IServiceCollection services)
         {
-            //services.AddScoped<IRepository, BaseRepository>();
-            services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
     }
 }

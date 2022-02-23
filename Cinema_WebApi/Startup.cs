@@ -28,7 +28,9 @@ namespace Cinema_WebApi
             //services.AddDbContext<CinemaDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("LocalCinemaDbConnection")));
             services.AddDbContext(Configuration.GetConnectionString("LocalCinemaDbConnection"));
 
-            services.AddRepository();
+            //services.AddRepository();
+            services.AddUnitOfWork();
+
             //services.AddSingleton<IRepository, Repository>();
             //services.AddScoped();
             //services.AddTransient();
