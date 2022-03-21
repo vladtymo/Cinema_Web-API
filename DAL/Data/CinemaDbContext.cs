@@ -1,10 +1,11 @@
 ﻿using Core.Entities;
 using DAL.Configurations;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace DAL.Data
 {
-    internal class CinemaDbContext : DbContext
+    internal class CinemaDbContext : IdentityDbContext
     {
         public CinemaDbContext(DbContextOptions options) : base(options)
         {

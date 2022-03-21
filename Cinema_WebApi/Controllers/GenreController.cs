@@ -1,5 +1,7 @@
 ﻿using Core;
 using Core.DTO;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
@@ -32,6 +34,7 @@ namespace Cinema_WebApi.Controllers
         //[HttpGet("/allgenres")] // allgenres
         [HttpGet]
         [ResponseCache(Duration = 60)]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)] 
         public async Task<ActionResult<IEnumerable<GenreDTO>>> Get()
         {
             return Ok(await _genreService.GetAllGenres());

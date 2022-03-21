@@ -8,6 +8,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Identity;
+using Cinema.Core.Helpers;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using Cinema.WebApi;
 
 namespace Cinema_WebApi
 {
@@ -27,6 +32,9 @@ namespace Cinema_WebApi
 
             //services.AddDbContext<CinemaDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("LocalCinemaDbConnection")));
             services.AddDbContext(Configuration.GetConnectionString("LocalCinemaDbConnection"));
+            services.AddIdentity();
+
+            services.Configure<JwtOptions>(Configuration.GetSection(nameof(JwtOptions)));
 
             //services.AddRepository();
             services.AddUnitOfWork();
@@ -40,6 +48,8 @@ namespace Cinema_WebApi
             services.AddAutoMapper();
 
             services.AddResponseCaching();
+
+            services.AddJwtAuthentication(Configuration);
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Cinema_WebApi", Version = "v1" });
@@ -75,6 +85,7 @@ namespace Cinema_WebApi
 
             app.UseResponseCaching();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

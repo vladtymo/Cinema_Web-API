@@ -3,6 +3,8 @@ using AutoMapper;
 using FluentValidation.AspNetCore;
 using Core.Validations;
 using Core.Helpers;
+using Cinema.Core.Services;
+using Cinema.Core.Interfaces;
 
 namespace Core
 {
@@ -11,7 +13,7 @@ namespace Core
         public static void AddCustomServices(this IServiceCollection services)
         {
             services.AddScoped<IGenreService, GenreService>();
-            // MovieService
+            services.AddScoped<IAccountService, AccountService>();
             //...
         }
 
